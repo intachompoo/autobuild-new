@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
       - name: nodejs
-        image: node:alpine
+        image: node-js:9.3.0-v1
         ports:
         - containerPort: 3000
