@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
       - name: nodejs
-        image: node-js:9.3.0-v1
+        image: nattawin/mynode:1.0.$BUILD_NUMBER
         ports:
         - containerPort: 8080
