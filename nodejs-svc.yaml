@@ -8,6 +8,7 @@ spec:
   type: NodePort
   ports:
   - port: 8080
+    nodePort: 32109
     protocol: TCP
   selector:
     app: nodejs
