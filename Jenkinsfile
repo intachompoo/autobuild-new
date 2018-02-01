@@ -1,9 +1,9 @@
 pipeline  {
     agent {
-    checkout scm
     dockerfile true
     }
     stages {
+        checkout scm
         stage('Test') {
             steps {
                 sh 'node --version'
