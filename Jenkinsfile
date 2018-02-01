@@ -7,6 +7,7 @@ pipeline  {
             steps {
                 sh 'node --version'
                 sh 'yarn --version'
+                sh 'curl -i 127.0.0.1:8080'
             }
         }
     }
