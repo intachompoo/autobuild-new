@@ -6,8 +6,6 @@ pipeline  {
 
         checkout scm
     }
-
-    }
     stage ('Docker Build') {
         withDockerServer([uri: "tcp://docker-node:2375"]) {
            agent { dockerfile true }
@@ -25,3 +23,5 @@ pipeline  {
            image.push()
         }
     }
+   }
+  }
