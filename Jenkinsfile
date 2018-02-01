@@ -3,7 +3,6 @@ pipeline  {
     dockerfile true
     }
     stages {
-        checkout scm
         stage('Test') {
             steps {
                 sh 'node --version'
