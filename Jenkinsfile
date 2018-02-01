@@ -3,11 +3,11 @@ pipeline  {
         /* Let's make sure we have the repository cloned to our workspace */
         checkout scm
     }
-    agent {
-       dockerfile true
-    }
     stage ('Docker Build') {
         withDockerServer([uri: "tcp://docker-node:2375"]) {
+        agent {
+           dockerfile true
+        }
            stages {
               stage('TEST') {
                  steps {
