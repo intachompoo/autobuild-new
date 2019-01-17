@@ -13,6 +13,11 @@ def finallyNotify(currentBuildresult) {
         to: 'nattawat.i@g-able.com'
 }
 
+def remote = [:]
+remote.name = "ansiblehost"
+remote.host = "10.88.66.114"
+remote.allowAnyHosts = true
+
 node('docker-jnlp-slave')
 {
     try
@@ -44,8 +49,7 @@ node('docker-jnlp-slave')
 					              //sh 'curl http://10.88.66.114:4243/version'
                         //image.push()
                         sh 'docker images|grep mynode'
-                        sh 'docker-compose ps'
-                   }
+                    }
                 }
 
                 docker.withServer('tcp://10.88.66.105:4243') {
@@ -64,6 +68,24 @@ node('docker-jnlp-slave')
 			        emailNotify("${currentBuild.currentResult}")
 			     }
         }
+
+        stage ('SSH-Remote')
+       {
+         try
+         {
+           withCredentials([sshUserPrivateKey(credentialsId: 'ansible114', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'root')]) {
+               //remote.user = userName
+               //remote.identityFile = identity
+               sshCommand remote: remote, command: 'ls -la /root'
+           }
+         }
+         catch (err)
+         {
+            throw err
+         }
+         finally
+         { emailNotify("${currentBuild.currentResult}") }
+       }
 
     }
     catch (err)
