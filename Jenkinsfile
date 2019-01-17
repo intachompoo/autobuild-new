@@ -44,6 +44,7 @@ node('docker-jnlp-slave')
 					              //sh 'curl http://10.88.66.114:4243/version'
                         //image.push()
                         sh 'docker images|grep mynode'
+                        sh 'docker-compose ps'
                    }
                 }
 
