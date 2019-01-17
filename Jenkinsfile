@@ -74,8 +74,8 @@ node('docker-jnlp-slave')
          try
          {
            withCredentials([sshUserPrivateKey(credentialsId: 'ansible114', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'root')]) {
-               //remote.user = userName
-               //remote.identityFile = identity
+               remote.user = root
+               remote.identityFile = identity
                sshCommand remote: remote, command: 'ls -la /root'
            }
          }
