@@ -38,7 +38,7 @@ node('docker-jnlp-slave')
          try
 			       {
 			            docker.withServer('tcp://10.88.66.114:4243') {
-                     docker.withRegistry('https://harbor.pcf.domain.cloud') {
+                     docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
 				                def image = docker.build("cicd/mynode:9.0.${env.BUILD_NUMBER}")
                         //sh 'echo would be connecting to $DOCKER_HOST'
 					              //sh 'curl http://10.88.66.114:4243/version'
