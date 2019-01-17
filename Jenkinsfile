@@ -76,8 +76,9 @@ node('docker-jnlp-slave')
            withCredentials([sshUserPrivateKey(credentialsId: 'ansible114', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'root')]) {
                remote.user = root
                remote.identityFile = identity
+               sshCommand remote: remote, command: 'rm -rf ~/simple-docker'
                sshCommand remote: remote, command: 'git clone https://github.com/PerchCMS/simple-docker.git'
-               sshCommand remote: remote, command: 'cd simple-docker'
+               sshCommand remote: remote, command: 'cd ~/simple-docker && ls -la ~/simple-docker'
                sshCommand remote: remote, command: 'ls -la'
            }
          }
