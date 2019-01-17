@@ -46,6 +46,12 @@ node('docker-jnlp-slave')
                         sh 'docker images|grep mynode'
                    }
                 }
+
+                docker.withServer('tcp://10.88.66.105:4243') {
+                   docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
+                      sh 'docker images|grep slave'
+                   }
+                }
 			      }
          catch (err)
 			     {
