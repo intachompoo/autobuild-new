@@ -32,7 +32,7 @@ node('docker-jnlp-slave')
        finally
        { emailNotify("${currentBuild.currentResult}") }
      }
-     
+
         stage ('Docker-Host')
         {
          try
@@ -40,13 +40,9 @@ node('docker-jnlp-slave')
 			            docker.withServer('tcp://10.88.66.114:4243') {
                      docker.withRegistry('https://harbor.pcf.domain.cloud') {
 				                def image = docker.build("cicd/mynode:9.0.${env.BUILD_NUMBER}")
-                        sh 'echo would be connecting to $DOCKER_HOST'
-					              sh 'curl http://10.88.66.114:4243/version'
+                        //sh 'echo would be connecting to $DOCKER_HOST'
+					              //sh 'curl http://10.88.66.114:4243/version'
 
-                        image.inside {
-                               sh 'node --version'
-                               sh 'yarn --version'
-                        }
                         image.push()
                    }
                 }
