@@ -79,7 +79,7 @@ node('docker-jnlp-slave')
                sshCommand remote: remote, command: 'rm -rf ~/simple-docker'
                sshCommand remote: remote, command: 'git clone https://github.com/PerchCMS/simple-docker.git'
                sshCommand remote: remote, command: 'cd ~/simple-docker && ls -la ~/simple-docker'
-               sshCommand remote: remote, command: 'ls -la'
+               sshCommand remote: remote, command: 'cd ~/simple-docker && docker-compose up -d'
            }
          }
          catch (err)
