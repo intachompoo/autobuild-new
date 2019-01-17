@@ -17,6 +17,22 @@ node('docker-jnlp-slave')
 {
     try
     {
+
+      stage ('Checkout SCM')
+     {
+       try
+       {
+          echo "Checkout SCM"
+          checkout scm
+       }
+       catch (err)
+       {
+          throw err
+       }
+       finally
+       { emailNotify("${currentBuild.currentResult}") }
+     }
+     
         stage ('Docker-Host')
         {
          try
