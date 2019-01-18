@@ -54,7 +54,7 @@ def commitId
 			       {
 			            docker.withServer('tcp://10.88.66.114:4243') {
                      docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
-				                image = docker.build("cicd/mynode:${commitId}")
+				                image = docker.build("cicd/mynode:${env.BUILD_ID}")
                         sh 'echo would be connecting to $DOCKER_HOST'
 					              //sh 'curl http://10.88.66.114:4243/version'
                         //image.push()
