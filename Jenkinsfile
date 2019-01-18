@@ -22,6 +22,7 @@ node('docker-jnlp-slave')
 {
 def image
 def gitCommitNum
+//def version = sh( script: 'git rev-parse --short HEAD > short-git-sha.tmp', returnStdout: true).toString().trim()
     try
     {
 
