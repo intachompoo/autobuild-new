@@ -34,7 +34,7 @@ def gitCommitNum
           checkout scm
           gitCommitNum = sh( script: 'git rev-parse --short HEAD > gitCommitNum')
 
-          def env.GIT_COMMIT_NUM = sh( script: 'git rev-parse --short HEAD > short-git-sha.tmp', returnStdout: true).toString().trim()
+          def env.GIT_COMMIT_NUM = sh( script: 'git rev-parse --short HEAD > short-git-sha.tmp', returnStdout: true)
           echo 'using new version ' +  GIT_COMMIT_NUM
        }
        catch (err)
