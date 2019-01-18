@@ -31,7 +31,7 @@ def gitCommitNum
        {
           echo "Checkout SCM"
           checkout scm
-          gitCommitNum = 'git rev-parse --short HEAD'
+          gitCommitNum = git rev-parse --short HEAD
        }
        catch (err)
        {
