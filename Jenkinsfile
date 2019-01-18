@@ -52,15 +52,13 @@ def commitId
         {
          try
 			       {
-             echo "This is ${gitCommitNum}"
 			            docker.withServer('tcp://10.88.66.114:4243') {
                      docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
-				                image = docker.build("cicd/mynode:9.0.${env.BUILD_NUMBER}")
+				                image = docker.build("cicd/mynode:9.0.${commitId}")
                         sh 'echo would be connecting to $DOCKER_HOST'
 					              //sh 'curl http://10.88.66.114:4243/version'
-                        image.push()
+                        //image.push()
                         sh 'docker images|grep mynode'
-                        echo "2. This is ${gitCommitNum}"
                     }
                 }
 			      }
