@@ -36,7 +36,7 @@ def gitCommitNum
 
           //def env.GIT_COMMIT_NUM = sh( script: 'git rev-parse --short HEAD > short-git-sha.tmp', returnStdout: true)
           //echo 'using new version ' +  GIT_COMMIT_NUM
-          echo "git commit number ${GIT_REVISION,length=6}"
+          echo "git commit number ${GIT_COMMIT,length=6}"
        }
        catch (err)
        {
