@@ -32,7 +32,7 @@ def gitCommitNum
        {
           echo "Checkout SCM"
           checkout scm
-          gitCommitNum = ${sh ('git rev-parse --short HEAD')}
+          gitCommitNum = sh( script: 'git rev-parse --short HEAD > short-git-sha.tmp', returnStdout: true).toString().trim()
        }
        catch (err)
        {
