@@ -21,6 +21,7 @@ remote.allowAnyHosts = true
 node('docker-jnlp-slave')
 {
 def image
+def gitCommitNum
     try
     {
 
@@ -30,6 +31,7 @@ def image
        {
           echo "Checkout SCM"
           checkout scm
+          gitCommitNum = sh( script: 'git rev-parse --short HEAD').toString().trim()
        }
        catch (err)
        {
@@ -43,6 +45,7 @@ def image
         {
          try
 			       {
+             echo "This is ${gitCommitNum}"
 			            docker.withServer('tcp://10.88.66.114:4243') {
                      docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
 				                image = docker.build("cicd/mynode:9.0.${env.BUILD_NUMBER}")
@@ -50,6 +53,7 @@ def image
 					              //sh 'curl http://10.88.66.114:4243/version'
                         image.push()
                         sh 'docker images|grep mynode'
+                        echo "2. This is ${gitCommitNum}"
                     }
                 }
 			      }
