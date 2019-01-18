@@ -20,6 +20,7 @@ remote.allowAnyHosts = true
 
 node('docker-jnlp-slave')
 {
+def image
     try
     {
 
@@ -38,25 +39,18 @@ node('docker-jnlp-slave')
        { emailNotify("${currentBuild.currentResult}") }
      }
 
-        stage ('Docker-Host')
+        stage ('Build-Image')
         {
          try
 			       {
 			            docker.withServer('tcp://10.88.66.114:4243') {
                      docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
-				                //def image = docker.build("cicd/mynode:9.0.${env.BUILD_NUMBER}")
+				                image = docker.build("cicd/mynode:9.0.${env.BUILD_NUMBER}")
                         sh 'echo would be connecting to $DOCKER_HOST'
 					              //sh 'curl http://10.88.66.114:4243/version'
-                        //image.push()
+                        image.push()
                         sh 'docker images|grep mynode'
                     }
-                }
-
-                docker.withServer('tcp://10.88.66.105:4243') {
-                   docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
-                      sh 'echo would be connecting to $DOCKER_HOST'
-                      sh 'docker images|grep slave'
-                   }
                 }
 			      }
          catch (err)
@@ -65,11 +59,11 @@ node('docker-jnlp-slave')
 			     }
          finally
 			     {
-			        emailNotify("${currentBuild.currentResult}")
+			        //emailNotify("${currentBuild.currentResult}")
 			     }
         }
 
-        stage ('SSH-Remote')
+    /*  stage ('SSH-Remote')
        {
          try
          {
@@ -88,7 +82,7 @@ node('docker-jnlp-slave')
          }
          finally
          { emailNotify("${currentBuild.currentResult}") }
-       }
+       } */
 
     }
     catch (err)
