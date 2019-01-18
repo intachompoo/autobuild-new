@@ -37,7 +37,7 @@ def commitId
 
           //def env.GIT_COMMIT_NUM = sh( script: 'git rev-parse --short HEAD > short-git-sha.tmp', returnStdout: true)
           //echo 'using new version ' +  GIT_COMMIT_NUM
-          commitId = sh(returnStdout: true, script: 'git rev-parse HEAD')
+          commitId = sh(returnStdout: true, script: 'git rev-parse --short HEAD')
           echo "git commit number ${commitId}"
        }
        catch (err)
