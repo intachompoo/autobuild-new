@@ -32,9 +32,9 @@ def gitCommitNum
        {
           echo "Checkout SCM"
           checkout scm
-          gitCommitNum = sh( script: 'git rev-parse --short HEAD')
-          
-          def version = sh( script: 'git rev-parse --short HEAD')
+          gitCommitNum = sh( script: 'git rev-parse --short HEAD > gitCommitNum')
+
+          def version = sh( script: 'git rev-parse --short HEAD > version.tmp && cat version.tmp')
           echo 'using new version ' +  version
        }
        catch (err)
