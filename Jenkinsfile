@@ -37,7 +37,7 @@ def commitId
 
           //def env.GIT_COMMIT_NUM = sh( script: 'git rev-parse --short HEAD > short-git-sha.tmp', returnStdout: true)
           //echo 'using new version ' +  GIT_COMMIT_NUM
-          commitId = sh(returnStdout: true, script: 'git rev-parse --short HEAD')
+          commitId = sh(returnStdout: true, script: 'git rev-parse --short HEAD').toString().trim()
           echo "git commit number ${commitId}"
        }
        catch (err)
@@ -54,7 +54,7 @@ def commitId
 			       {
 			            docker.withServer('tcp://10.88.66.114:4243') {
                      docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
-				                image = docker.build("cicd/mynode:${env.BUILD_ID}")
+				                image = docker.build("cicd/mynode:${commitId}")
                         sh 'echo would be connecting to $DOCKER_HOST'
 					              //sh 'curl http://10.88.66.114:4243/version'
                         //image.push()
