@@ -36,7 +36,7 @@ def gitCommitNum
 
           def version = sh( script: 'git rev-parse --short HEAD > version.tmp && cat version.tmp')
           echo 'using new version ' +  version
-          echo "git commit id ${sh ('git rev-parse --short HEAD')}"
+          echo "git commit id ${git rev-parse --short HEAD}"
        }
        catch (err)
        {
