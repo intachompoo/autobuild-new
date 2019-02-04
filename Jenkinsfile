@@ -77,7 +77,7 @@ def commitId
 			       {
 			            docker.withServer('tcp://10.88.66.114:4243') {
                      docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
-                       sh 'docker-compose up -d'
+                       //sh 'docker-compose up -d'
                        //sh 'docker-compose down -v'
                     }
                 }
