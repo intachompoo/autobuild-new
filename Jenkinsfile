@@ -57,8 +57,27 @@ def commitId
 				                image = docker.build("cicd/mynode:${commitId}")
                         sh 'echo would be connecting to $DOCKER_HOST'
 					              //sh 'curl http://10.88.66.114:4243/version'
-                        //image.push()
-                        sh 'docker images|grep mynode'
+                        image.push()
+                    }
+                }
+			      }
+         catch (err)
+			     {
+			        throw err
+			     }
+         finally
+			     {
+			        //emailNotify("${currentBuild.currentResult}")
+			     }
+        }
+
+        stage ('Docker-Compose-UP')
+        {
+         try
+			       {
+			            docker.withServer('tcp://10.88.66.114:4243') {
+                     docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
+                       sh 'docker-compose up -d'
                     }
                 }
 			      }

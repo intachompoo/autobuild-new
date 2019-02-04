@@ -1,0 +1,9 @@
+version: "2"
+services:
+  web:
+    image: "harbor.pcf.domain.cloud/cicd/my-spring:1.0.${commitId}"
+    container_name: web_spring
+    restart: always
+    mem_limit: 2g
+    ports:
+      - "8080:8080"
