@@ -79,7 +79,7 @@ def COMMITID
                      docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
                        echo "Images tag is ${COMMITID}"
                        sh "export COMMITID=${COMMITID}"
-                       sh 'docker-compose up -d commitId=$COMMITID'
+                       sh "docker-compose up -d commitId=${COMMITID}"
                        //sh 'docker-compose down -v'
                     }
                 }
