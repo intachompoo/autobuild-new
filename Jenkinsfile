@@ -57,7 +57,7 @@ def COMMITID
 				                image = docker.build("cicd/mynode:${COMMITID}")
                         sh 'echo would be connecting to $DOCKER_HOST'
 					              //sh 'curl http://10.88.66.114:4243/version'
-                        //image.push()
+                        image.push()
                     }
                 }
 			      }
