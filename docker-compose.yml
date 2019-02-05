@@ -1,7 +1,7 @@
 version: "2"
 services:
   web:
-    image: "harbor.pcf.domain.cloud/cicd/mynode:${COMMITID}"
+    image: "harbor.pcf.domain.cloud/cicd/mynode:${commitId}"
     container_name: my_node
     restart: always
     mem_limit: 2g
