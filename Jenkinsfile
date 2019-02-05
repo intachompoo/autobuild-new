@@ -77,7 +77,7 @@ def COMMITID
 			       {
 			            docker.withServer('tcp://10.88.66.114:4243') {
                      docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
-                       sh 'docker-compose up -d commitId=${COMMITID}'
+                       sh 'export COMMITID=${COMMITID} && docker-compose up -d commitId=$COMMITID'
                        //sh 'docker-compose down -v'
                     }
                 }
