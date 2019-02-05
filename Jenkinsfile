@@ -22,7 +22,7 @@ node('docker-jnlp-slave')
 {
 def image
 def gitCommitNum
-def commitId
+def COMMITID
 //def version = sh( script: 'git rev-parse --short HEAD > short-git-sha.tmp', returnStdout: true).toString().trim()
     try
     {
@@ -37,8 +37,8 @@ def commitId
 
           //def env.GIT_COMMIT_NUM = sh( script: 'git rev-parse --short HEAD > short-git-sha.tmp', returnStdout: true)
           //echo 'using new version ' +  GIT_COMMIT_NUM
-          commitId = sh(returnStdout: true, script: 'git rev-parse --short HEAD').toString().trim()
-          echo "git commit number ${commitId}"
+          COMMITID = sh(returnStdout: true, script: 'git rev-parse --short HEAD').toString().trim()
+          echo "git commit number ${COMMITID}"
        }
        catch (err)
        {
@@ -54,7 +54,7 @@ def commitId
 			       {
 			            docker.withServer('tcp://10.88.66.114:4243') {
                      docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
-				                image = docker.build("cicd/mynode:${commitId}")
+				                image = docker.build("cicd/mynode:${COMMITID}")
                         sh 'echo would be connecting to $DOCKER_HOST'
 					              //sh 'curl http://10.88.66.114:4243/version'
                         //image.push()
@@ -77,7 +77,7 @@ def commitId
 			       {
 			            docker.withServer('tcp://10.88.66.114:4243') {
                      docker.withRegistry('https://harbor.pcf.domain.cloud', 'harbor101') {
-                       sh 'docker-compose up -d commitId=${commitId}'
+                       sh 'docker-compose up -d commitId=${COMMITID}'
                        //sh 'docker-compose down -v'
                     }
                 }
